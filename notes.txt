@@ -1,0 +1,20 @@
+1) create venv (python3 -m venv <name>) # usually call name=venv
+   run the activate script within venv
+2) create project
+   django-admin startproject <name>
+3) python .\manage.py migrate
+4) python .\manage.py createsuperuser   # aljosin13@yahoo.com | admin | admin
+5) Create app: python .\manage.py startapp products
+6) Create product data class, add it to settings
+7) python manage.py makemigrations
+8) python manage.py migrate
+9) import new model to admin.py
+10) can create products as admin or in python shell
+11) python manage.py shell
+12) from products.models import Product
+13) Product.objects.all()
+    Product.objects.create(title='Shoe', description='Nike shoes that fit well', price=79.89, featured=True)
+14) Now we want to create new views so we have a default web page
+15) python manage.py startapp pages
+16) After creating a function returning http response it won't work because you need to configure the url
+17) Add url to urls.py
