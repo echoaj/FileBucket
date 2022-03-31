@@ -1,0 +1,62 @@
+/* References: https://coolors.co/182825-016fb9-22aed1-6d8ea0-afa98d */
+@import url('https://fonts.googleapis.com/css2?family=Amiko&family=Averia+Libre:wght@300&family=Bebas+Neue&family=DM+Sans&family=Heebo:wght@300&family=Hind+Madurai:wght@300&family=Inconsolata:wght@500&family=Lexend+Deca:wght@500&family=Noto+Sans&family=Open+Sans:wght@300&family=Prompt:wght@300&family=Work+Sans:wght@200;400&family=Zen+Kaku+Gothic+New:wght@300;400&display=swap');
+
+:root {
+    --bgcolor: #6D8EA0;
+    --txcolor: white;
+    --dadcolor: #AFA98D;
+    --bs: 50px;
+    font-family: 'Averia Libre', cursive;
+
+}
+
+body {
+    margin: 0px;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+    height: 100vh;
+    background-color: var(--bgcolor);
+}
+
+.text{
+    margin: var(--bs) calc(var(--bs) / 2) var(--bs) var(--bs);
+    background-color: var(--txcolor);
+    padding: 15px;
+}
+
+.file {
+    margin: var(--bs) var(--bs) var(--bs) calc(var(--bs) / 2);
+    background-color: var(--dadcolor);
+    text-align: center;
+    cursor: pointer;
+    position: relative;
+}
+
+.text, .file {
+    border-radius: 15px;
+}
+
+.title{
+    text-align: center;
+    text-decoration: none;
+    font-weight: none;
+    /* position: fixed;
+    top: 0px; */
+}
+
+img{
+    width: 200px;
+    height: 200px;
+    
+}
+
+.group {
+    position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
