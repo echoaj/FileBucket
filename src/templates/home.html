@@ -18,10 +18,12 @@
 
     <div class="grid-container">
 
-        <div class="grid-child text">
-            <textarea class=""></textarea>
-            <button>Enter</button>
-        </div>
+        <form class="grid-child text" method="POST">
+            <!-- Middleware token -->
+            {% csrf_token %}
+            <textarea name="user_input"></textarea>
+            <button type="submit">Enter</button>
+        </form>
         
         <div class="grid-child file">
             <div class="group">
@@ -30,6 +32,10 @@
             </div>
         </div>
       
+    </div>
+
+    <div>
+        {{ text_info }}
     </div>
 
 </body>
