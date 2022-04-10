@@ -2,9 +2,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Amiko&family=Averia+Libre:wght@300&family=Bebas+Neue&family=DM+Sans&family=Heebo:wght@300&family=Hind+Madurai:wght@300&family=Inconsolata:wght@500&family=Lexend+Deca:wght@500&family=Noto+Sans&family=Open+Sans:wght@300&family=Prompt:wght@300&family=Work+Sans:wght@200;400&family=Zen+Kaku+Gothic+New:wght@300;400&display=swap');
 
 :root {
-    --bgcolor: #6D8EA0;
+    --bgcolor: #40544B;
+    --dadcolor: #DCDBC9;
+    --clearButtonColor: #954C50;
+    --copyButtonColor: #738972;
+    --EnterButtonColor: #4F6069;
+    --titleBackground: #AAC5B4;
+
     --txcolor: white;
-    --dadcolor: #AFA98D;
+
     --bs: 50px;
     font-family: 'Averia Libre', cursive;
 
@@ -12,6 +18,7 @@
 
 body {
     margin: 0px;
+    padding: 0px;
 }
 
 .grid-container {
@@ -41,11 +48,14 @@ body {
 }
 
 .title{
+    background-color: var(--titleBackground);
     text-align: center;
     text-decoration: none;
     font-weight: none;
     /* position: fixed;
     top: 0px; */
+    margin: 0px;
+    padding: 4px;
 }
 
 img{
@@ -56,19 +66,35 @@ img{
 
 .group {
     position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
-button {
-    background-color: var(--bgcolor);
-    width: 100%;
+#all_text_buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+}
+
+.text_button {
     height: 25px;
     border-radius: 5px;
     border: none;
     color: white;
     cursor: pointer;
+}
+
+#clear {
+    background-color: var(--clearButtonColor);
+}
+
+#copy {
+    background-color: var(--copyButtonColor);
+}
+
+#enter {
+    background-color: var(--EnterButtonColor);
 }
 
 textarea, textarea:focus {

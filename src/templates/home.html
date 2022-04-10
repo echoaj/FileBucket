@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 {% load static %}
 <html lang="en">
@@ -7,37 +6,50 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
     <title>File Bucket</title>
 </head>
 
 <body>
 
-    <h1 class="title">File Bucket Share text and files in real time!</h1>
 
+    <h4 class="title">File Bucket Share text and files in real time!</h4>
     <div class="grid-container">
 
         <form class="grid-child text" method="POST">
             <!-- Middleware token -->
             {% csrf_token %}
-            <textarea name="user_input"></textarea>
-            <button type="submit">Enter</button>
+            <textarea id="user_text" name="user_input" spellcheck="true">{{ text_info }}</textarea>
+            <div id="all_text_buttons">
+                <button class="text_button" id="clear" onclick="clearText()">Clear</button>
+                <button class="text_button" id="copy" onclick="copyToClipboard()">Copy</button>
+                <button class="text_button" id="enter" type="submit">Enter</button>
+            </div>
         </form>
-        
+
         <div class="grid-child file">
             <div class="group">
                 <h1>Drag and Drop</h1>
                 <img src="/static/ArrowUpload.png" alt="Upload Arrow Icon">
             </div>
         </div>
-      
+
     </div>
 
-    <div>
-        {{ text_info }}
-    </div>
+    <script>
+        function copyToClipboard() {
+            var textelem = document.getElementById("user_text");
+            textelem.select();
+            textelem.setSelectionRange(0, 9999);
+            document.execCommand("copy");
+        }
+
+        function clearText(){
+            document.getElementById("user_text").value = "";
+        }
+    </script>
 
 </body>
 
 </html>
+
