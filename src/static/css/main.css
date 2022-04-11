@@ -1,0 +1,96 @@
+/* References: https://coolors.co/182825-016fb9-22aed1-6d8ea0-afa98d */
+@import url("https://fonts.googleapis.com/css2?family=Amiko&family=Averia+Libre:wght@300&family=Bebas+Neue&family=DM+Sans&family=Heebo:wght@300&family=Hind+Madurai:wght@300&family=Inconsolata:wght@500&family=Lexend+Deca:wght@500&family=Noto+Sans&family=Open+Sans:wght@300&family=Prompt:wght@300&family=Work+Sans:wght@200;400&family=Zen+Kaku+Gothic+New:wght@300;400&display=swap");
+body {
+  font-family: 'Averia Libre', cursive;
+  margin: 0px;
+  padding: 0px;
+}
+
+.container {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1fr;
+  grid-gap: 20px;
+  height: 100vh;
+  background-color: #40544B;
+}
+
+.text {
+  margin: 50px calc(50px / 2) 50px 50px;
+  background-color: white;
+  padding: 15px;
+}
+
+.text, .file {
+  border-radius: 15px;
+}
+
+.file {
+  margin: 50px 50px 50px calc(50px / 2);
+  background-color: #DCDBC9;
+  text-align: center;
+  cursor: pointer;
+  position: relative;
+}
+
+.title {
+  background-color: #AAC5B4;
+  text-align: center;
+  text-decoration: none;
+  font-weight: none;
+  margin: 0px;
+  padding: 4px;
+}
+
+img {
+  width: 200px;
+  height: 200px;
+}
+
+textarea, textarea:focus {
+  width: 99%;
+  height: 95%;
+  resize: none;
+}
+
+textarea:focus {
+  outline: none;
+}
+
+.text-buttons {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+}
+
+.text-buttons > button {
+  height: 25px;
+  border-radius: 5px;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+#clear {
+  background-color: #954C50;
+}
+
+#copy {
+  background-color: #738972;
+}
+
+#enter {
+  background-color: #4F6069;
+}
+
+.group {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+}
+/*# sourceMappingURL=main.css.map */

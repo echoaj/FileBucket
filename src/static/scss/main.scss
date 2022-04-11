@@ -1,0 +1,98 @@
+/* References: https://coolors.co/182825-016fb9-22aed1-6d8ea0-afa98d */
+@import url('https://fonts.googleapis.com/css2?family=Amiko&family=Averia+Libre:wght@300&family=Bebas+Neue&family=DM+Sans&family=Heebo:wght@300&family=Hind+Madurai:wght@300&family=Inconsolata:wght@500&family=Lexend+Deca:wght@500&family=Noto+Sans&family=Open+Sans:wght@300&family=Prompt:wght@300&family=Work+Sans:wght@200;400&family=Zen+Kaku+Gothic+New:wght@300;400&display=swap');
+@import "./variables";
+
+@function bg($bg-type) {
+    @return map-get($bg-color-palette, $bg-type);
+}
+
+body {
+    font-family: 'Averia Libre', cursive;
+    margin: 0px;
+    padding: 0px;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+    height: 100vh;
+    background-color: bg("background");
+}
+
+.text{
+    margin: $bs calc(#{$bs} / 2) $bs $bs;
+    background-color: $text-color;
+    padding: 15px;
+}
+
+.text, .file {
+    border-radius: 15px;
+}
+
+.file {
+    margin: $bs $bs $bs calc(#{$bs} / 2);
+    background-color: bg("file");
+    text-align: center;
+    cursor: pointer;
+    position: relative;
+}
+
+.title{
+    background-color: bg("title");
+    text-align: center;
+    text-decoration: none;
+    font-weight: none;
+    margin: 0px;
+    padding: 4px;
+}
+
+img {
+    width: 200px;
+    height: 200px;
+}
+
+textarea, textarea:focus {
+    width: 99%;
+    height: 95%;
+    resize: none;
+}
+
+textarea:focus {
+    outline: none;
+}
+
+.text-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+
+    > button {
+        height: 25px;
+        border-radius: 5px;
+        border: none;
+        color: white;
+        cursor: pointer;
+    }
+}
+
+#clear {
+    background-color: bg("clear");
+}
+
+#copy {
+    background-color: bg("copy");
+}
+
+#enter {
+    background-color: bg("enter");
+}
+
+// ****** File ******
+.group {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
