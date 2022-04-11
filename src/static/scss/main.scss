@@ -1,4 +1,4 @@
-/* References: https://coolors.co/182825-016fb9-22aed1-6d8ea0-afa98d */
+/* References: https://coolors.co/palette/6b2e32-954c50-c1928e-e9c8c4-f3e8cd-dcdbc9-aac5b4-738972-40544b-4f6069 */
 @import url('https://fonts.googleapis.com/css2?family=Amiko&family=Averia+Libre:wght@300&family=Bebas+Neue&family=DM+Sans&family=Heebo:wght@300&family=Hind+Madurai:wght@300&family=Inconsolata:wght@500&family=Lexend+Deca:wght@500&family=Noto+Sans&family=Open+Sans:wght@300&family=Prompt:wght@300&family=Work+Sans:wght@200;400&family=Zen+Kaku+Gothic+New:wght@300;400&display=swap');
 @import "./variables";
 
@@ -10,23 +10,42 @@ body {
     font-family: 'Averia Libre', cursive;
     margin: 0px;
     padding: 0px;
-}
-
-.container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-gap: 20px;
-    height: 100vh;
     background-color: bg("background");
 }
 
-.text{
+.container {
+    height: 100%;
+}
+
+.title {
+    background-color: bg("title");
+    text-align: center;
+    text-decoration: none;
+    font-weight: none;
+    margin: 0px;
+    padding: 4px;
+}
+
+.options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+    background-color: bg("background");
+    position: absolute;
+    top: 27px;
+    bottom: 0;
+    width: 100%;
+    min-height: 500px;
+}
+
+.text {
     margin: $bs calc(#{$bs} / 2) $bs $bs;
     background-color: $text-color;
     padding: 15px;
 }
 
-.text, .file {
+.text,
+.file {
     border-radius: 15px;
 }
 
@@ -38,21 +57,13 @@ body {
     position: relative;
 }
 
-.title{
-    background-color: bg("title");
-    text-align: center;
-    text-decoration: none;
-    font-weight: none;
-    margin: 0px;
-    padding: 4px;
-}
-
 img {
     width: 200px;
     height: 200px;
 }
 
-textarea, textarea:focus {
+textarea,
+textarea:focus {
     width: 99%;
     height: 95%;
     resize: none;
@@ -67,7 +78,7 @@ textarea:focus {
     grid-template-columns: 1fr 1fr 1fr;
     gap: 10px;
 
-    > button {
+    >button {
         height: 25px;
         border-radius: 5px;
         border: none;
@@ -95,4 +106,3 @@ textarea:focus {
     left: 50%;
     transform: translate(-50%, -50%);
 }
-

@@ -13,27 +13,28 @@
 <body>
 
 
-    <h4 class="title">File Bucket Share text and files in real time!</h4>
     <div class="container">
+        <h4 class="title">File Bucket Share text and files in real time!</h4>
 
-        <form class="text" method="POST">
-            <!-- Middleware token -->
-            {% csrf_token %}
-            <textarea id="user-text" name="user_input" spellcheck="true">{{ text_info }}</textarea>
-            <div class="text-buttons">
-                <button id="clear" onclick="clearText()">Clear</button>
-                <button id="copy" onclick="copyToClipboard()">Copy</button>
-                <button id="enter" type="submit">Enter</button>
-            </div>
-        </form>
+        <div class="options">
+            <form class="text" method="POST">
+                <!-- Middleware token -->
+                {% csrf_token %}
+                <textarea id="user-text" name="user_input" spellcheck="true">{{ text_info }}</textarea>
+                <div class="text-buttons">
+                    <button id="clear" onclick="clearText()">Clear</button>
+                    <button id="copy" onclick="copyToClipboard()">Copy</button>
+                    <button id="enter" type="submit">Enter</button>
+                </div>
+            </form>
 
-        <div class="file">
-            <div class="group">
-                <h1>Drag and Drop</h1>
-                <img src="/static/ArrowUpload.png" alt="Upload Arrow Icon">
+            <div class="file">
+                <div class="group">
+                    <h1>Drag and Drop</h1>
+                    <img src="/static/ArrowUpload.png" alt="Upload Arrow Icon">
+                </div>
             </div>
         </div>
-
     </div>
 
     <script>
@@ -44,7 +45,7 @@
             document.execCommand("copy");
         }
 
-        function clearText(){
+        function clearText() {
             document.getElementById("user-text").value = "";
         }
     </script>
@@ -52,4 +53,3 @@
 </body>
 
 </html>
-
