@@ -124,3 +124,8 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Director on your computer
+MEDIA_ROOT = BASE_DIR / 'media'
+# Url browser uses over http to access files
+MEDIA_URL = '/media/'

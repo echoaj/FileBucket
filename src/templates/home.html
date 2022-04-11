@@ -7,6 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+    <!-- <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+<link rel="icon" href="/favicon.ico" type="image/x-icon"> -->
     <title>File Bucket</title>
 </head>
 
@@ -29,23 +31,46 @@
 
             <div class="file">
                 <div class="group">
-                    <h1>Drag and Drop</h1>
-                    <img src="/static/ArrowUpload.png" alt="Upload Arrow Icon">
+                    <button class="file-button" onclick="chooseFile()">⮬ Choose File</button>
+                    <form id="file-form" action="" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <input type="file" id="file-choose" style="display: none" name="doc"
+                            accept="image/gif,image/jpeg,image/jpg,image/png" multiple="" method="post"
+                            enctype="multipart/form-data" data-original-title="choose file"
+                            onchange="uploadFile(event)">
+                            
+                        <button class="file-button-upload" style="display: none" type="submit">Upload File</button>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
 
     <script>
+        const textarea = document.getElementById("user-text");
+        const inputfile = document.getElementById("file-choose");
+        const fileform = document.getElementById("file-form");
+        const uploadBtn = document.getElementsByClassName("file-button-upload")[0];
+
         function copyToClipboard() {
-            var textelem = document.getElementById("user-text");
-            textelem.select();
-            textelem.setSelectionRange(0, 9999);
-            document.execCommand("copy");
+            textarea.select();
+            textarea.setSelectionRange(0, 9999);
+            textarea.execCommand("copy");
         }
 
         function clearText() {
-            document.getElementById("user-text").value = "";
+            textarea.value = "";
+        }
+
+        function chooseFile() {
+            inputfile.click();
+        }
+
+        function uploadFile(e) {
+            const fileName = e.target.files[0].name;
+            let filedata = `<h1>${fileName}</h4>`;
+            uploadBtn.style.display = 'inline';
+            fileform.insertAdjacentHTML("beforeend", filedata);
         }
     </script>
 
