@@ -127,5 +127,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Director on your computer
 MEDIA_ROOT = BASE_DIR / 'media'
-# Url browser uses over http to access files
+# Url browser used to access file
 MEDIA_URL = '/media/'

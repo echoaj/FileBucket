@@ -17,9 +17,17 @@ def home_view(request):
             db = Info(text=text)
             db.save()
         elif "file-upload-button" in request.POST:
-            uploaded_file = request.FILES['doc']
-            fs = FileSystemStorage()
-            fs.save(uploaded_file.name, uploaded_file)
+            fss = FileSystemStorage()
+            file = request.FILES['doc']
+            fss.save(file.name, file)
+            name, extension = str(file.name).split('.')
+
+            data = {'text_info': text,
+                    "file_name": name,
+                    "file_extension": extension,
+                    "file_size": file.size,
+                    "file_url": fss.url(file)}
+
+            return render(request, "home.html", data)
 
     return render(request, "home.html", {'text_info': text})
-
