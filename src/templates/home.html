@@ -21,25 +21,25 @@
             <form class="text" method="POST">
                 <!-- Middleware token -->
                 {% csrf_token %}
-                <textarea id="user-text" name="user_input" spellcheck="true">{{ text_info }}</textarea>
+                <textarea id="user-text" name="user-input-text" spellcheck="true">{{ text_info }}</textarea>
                 <div class="text-buttons">
-                    <button id="clear" onclick="clearText()">Clear</button>
-                    <button id="copy" onclick="copyToClipboard()">Copy</button>
-                    <button id="enter" type="submit">Enter</button>
+                    <button id="clear" type="submit" name="text-clear-button" onclick="clearText()">Clear</button>
+                    <button id="copy" type="button" onclick="copyToClipboard()">Copy</button>
+                    <button id="enter" type="submit" name="text-enter-button">Enter</button>
                 </div>
             </form>
 
             <div class="file">
                 <div class="group">
                     <button class="file-button" onclick="chooseFile()">⮬ Choose File</button>
-                    <form id="file-form" action="" method="post" enctype="multipart/form-data">
+                    <form id="file-form" method="POST" enctype="multipart/form-data">
                         {% csrf_token %}
                         <input type="file" id="file-choose" style="display: none" name="doc"
                             accept="image/gif,image/jpeg,image/jpg,image/png" multiple="" method="post"
                             enctype="multipart/form-data" data-original-title="choose file"
                             onchange="uploadFile(event)">
                             
-                        <button class="file-button-upload" style="display: none" type="submit">Upload File</button>
+                        <button class="file-button-upload" name="file-upload-button" style="display: none" type="submit">Upload File</button>
                     </form>
                 </div>
             </div>
@@ -55,7 +55,8 @@
         function copyToClipboard() {
             textarea.select();
             textarea.setSelectionRange(0, 9999);
-            textarea.execCommand("copy");
+            document.execCommand("copy");
+            textarea.setSelectionRange(0, 0);
         }
 
         function clearText() {

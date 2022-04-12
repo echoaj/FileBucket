@@ -5,21 +5,21 @@ from django.core.files.storage import FileSystemStorage
 
 # Create your views here.
 def home_view(request):
-    if request.method == "GET":
-        text = Info.objects.last().text
-        return render(request, "home.html", {'text_info': text})
+    text = Info.objects.last().text
+
     if request.method == "POST":
-        uploaded_file = request.FILES['doc']
-        print("*****************************************")
-        print(uploaded_file.name)
-        print(uploaded_file.size)
-        print("*****************************************")
-        fs = FileSystemStorage()
-        fs.save(uploaded_file.name, uploaded_file);
-        # TEXT
-        # text = request.POST.get('user_input', False)
-        # db = Info(text=text)
-        # db.save()
-        text=''
-        return render(request, "home.html", {'text_info': text})
+        if "text-clear-button" in request.POST:
+            text = ''
+            db = Info(text=text)
+            db.save()
+        elif "text-enter-button" in request.POST:
+            text = request.POST.get('user-input-text', False)
+            db = Info(text=text)
+            db.save()
+        elif "file-upload-button" in request.POST:
+            uploaded_file = request.FILES['doc']
+            fs = FileSystemStorage()
+            fs.save(uploaded_file.name, uploaded_file)
+
+    return render(request, "home.html", {'text_info': text})
 
