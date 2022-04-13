@@ -5,6 +5,7 @@ const fileChooseBtn = document.getElementById("file-button");
 const fileChoose = document.getElementById("file-choose");
 const fileForm = document.getElementById("file-form");
 const fileUploadBtn = document.getElementById("file-button-upload");
+const fileDownloadLabel = document.getElementById("file-download-label");
 
 
 textarea.addEventListener("keydown", (e) => {
@@ -43,6 +44,7 @@ fileChooseBtn.addEventListener("click", () => {
 fileChoose.addEventListener("change", (e) => {
     e.preventDefault();
     fileUploadBtn.click();
+    // fileDownloadLabel.style.display = "block";
 })
 
 function downloadFile(url, name) {
