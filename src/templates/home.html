@@ -30,18 +30,20 @@
 
             <div class="file">
                 <div class="group">
-                    <button class="file-button">⮬ Choose File</button>
+                    <div id="file-download" onclick="downloadFile('{{file_url}}', '{{file_name}}')">{{file_name}}</div>
+                    <button class="big-button" id="file-button" type="button">⮬ Choose File</button>
+                    <br><br>
+                    <button class="big-button" id="file-button-download" type="button">⮮ Download</button>
                     <form id="file-form" method="POST" enctype="multipart/form-data">
                         {% csrf_token %}
                         <input type="file" id="file-choose" style="display: none" name="doc"
                             accept="image/gif,image/jpeg,image/jpg,image/png" multiple="" method="post"
                             enctype="multipart/form-data" data-original-title="choose file">
 
-                        <button class="file-button-upload" name="file-upload-button" style="display: none"
-                            type="submit">Upload File</button>
+                        <button id="file-button-upload" name="file-upload-button" style="display: none"
+                            type="submit"></button>
                     </form>
                 </div>
-                <div id="file-download" onclick="downloadFile('{{file_url}}', '{{file_name}}')">{{file_name}}</div>
             </div>
         </div>
     </div>

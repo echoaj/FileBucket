@@ -103,8 +103,7 @@ textarea:focus {
     position: relative;
 }
 
-.file-button,
-.file-button-upload {
+.big-button {
     font-size: large;
     width: 150px;
     height: 60px;
@@ -114,13 +113,19 @@ textarea:focus {
     cursor: pointer;
 }
 
-.file-button{
+#file-button{
     background-color: bg("enter");
 }
 
-.file-button-upload {
+#file-button-upload {
     background-color: bg("copy");
     margin-top: 15px;
+}
+
+#file-button-download {
+    background-color: rgb(61, 61, 61);
+    padding-right: 20px;
+
 }
 
 h1 {

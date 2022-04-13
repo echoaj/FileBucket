@@ -1,11 +1,29 @@
 const textarea = document.getElementById("user-text");
 const clearBtn = document.getElementById("clear");
 const copyBtn = document.getElementById("copy");
-const fileChooseBtn = document.getElementsByClassName("file-button")[0];
+const fileChooseBtn = document.getElementById("file-button");
 const fileChoose = document.getElementById("file-choose");
 const fileForm = document.getElementById("file-form");
-const fileDownload = document.getElementById("file-download");
-const fileUploadBtn = document.getElementsByClassName("file-button-upload")[0];
+// const fileDownload = document.getElementById("file-download");
+const fileUploadBtn = document.getElementById("file-button-upload");
+
+
+textarea.addEventListener("keydown", (e) => {
+    var key = e.key || e.keyCode;
+    if (key === "Tab") {
+        e.preventDefault();
+        if (e.shiftKey) {
+            // SHIFT TAB PRESSED
+            let startPos = textarea.selectionStart;
+            textarea.setRangeText('', startPos - 4, startPos, 'end');
+        }
+        else {
+            // TAB PRESSED
+            let startPos = textarea.selectionStart;
+            textarea.setRangeText('    ', startPos, startPos, 'end');
+        }
+    }
+})
 
 
 clearBtn.addEventListener("click", () => {
@@ -52,25 +70,6 @@ function downloadFile(url, name) {
         }, 200);
     });
 }
-
-textarea.addEventListener("keydown", (e) => {
-    var key = e.key || e.keyCode;
-    if (key === "Tab") {
-        e.preventDefault();
-        if (e.shiftKey) {
-            // SHIFT TAB PRESSED
-            let startPos = textarea.selectionStart;
-            textarea.setRangeText('', startPos - 4, startPos, 'end');
-        }
-        else {
-            // TAB PRESSED
-            let startPos = textarea.selectionStart;
-            textarea.setRangeText('    ', startPos, startPos, 'end');
-        }
-    }
-})
-
-
 
 /*
 ALL KEY CODES
