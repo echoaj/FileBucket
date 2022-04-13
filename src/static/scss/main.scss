@@ -47,7 +47,7 @@ body {
 
 .text,
 .file {
-    border-radius: 15px;
+    border-radius: $big-border-radius;
 }
 
 textarea,
@@ -68,7 +68,7 @@ textarea:focus {
 
     >button {
         height: 25px;
-        border-radius: 5px;
+        border-radius: $small-border-radius;
         border: none;
         color: white;
         cursor: pointer;
@@ -88,19 +88,59 @@ textarea:focus {
 }
 
 // ****** File ******
-.group {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+// .bottom {
+//     position: absolute;
+//     top: 50%;
+//     left: 50%;
+//     transform: translate(-50%, -50%);
+//     position: relative;
+// }
+
+.file {
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-auto-rows: minmax(min-content, max-content);
+    margin: $bs $bs $bs calc(#{$bs} / 2);
+    background-color: bg("file");
+    // text-align: center;
+    // position: relative;
+}
+
+.file > section {
+    border-radius: $big-border-radius;
+}
+
+.top {
+    // background-color: lightcyan;
     position: relative;
 }
 
-.file {
-    margin: $bs $bs $bs calc(#{$bs} / 2);
-    background-color: bg("file");
-    text-align: center;
+.middle {
+    // background-color: lightgreen;
     position: relative;
+}
+
+.bottom {
+    // background-color: lightpink;
+}
+
+#file-download-label {
+    border-style: dashed;
+    border-color: bg("download");
+    font-size: 40px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px 30px;
+    border-radius: $big-border-radius;
+}
+
+.file-button-group {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .big-button {
@@ -108,7 +148,7 @@ textarea:focus {
     width: 150px;
     height: 60px;
     color: $text-color;
-    border-radius: 5px;
+    border-radius: $small-border-radius;
     border: none;
     cursor: pointer;
 }
@@ -123,10 +163,10 @@ textarea:focus {
 }
 
 #file-button-download {
-    background-color: rgb(61, 61, 61);
+    background-color: bg("download");
     padding-right: 20px;
-
 }
+
 
 h1 {
     font-size: 2vw;

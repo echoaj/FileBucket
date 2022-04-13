@@ -20,11 +20,14 @@ def home_view(request):
             fss = FileSystemStorage()
             file = request.FILES['doc']
             fss.save(file.name, file)
-            name, extension = str(file.name).split('.')
+            result = str(file.name).split('.')
+            extension = result.pop()
+            name = ".".join(result)
 
             data = {'text_info': text,
                     "file_name": name,
                     "file_extension": extension,
+                    "file_title": file.name,
                     "file_size": file.size,
                     "file_url": fss.url(file)}
 

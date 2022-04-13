@@ -29,11 +29,22 @@
             </form>
 
             <div class="file">
-                <div class="group">
-                    <div id="file-download" onclick="downloadFile('{{file_url}}', '{{file_name}}')">{{file_name}}</div>
-                    <button class="big-button" id="file-button" type="button">⮬ Choose File</button>
-                    <br><br>
-                    <button class="big-button" id="file-button-download" type="button">⮮ Download</button>
+                <section class="top">
+                    <div id="file-download-label" onclick="downloadFile('{{file_url}}', '{{file_name}}')">
+                        {{file_title}}
+                    </div>
+                </section>
+
+                <section class="middle">
+                    <div class="file-button-group">
+                        <button class="big-button" id="file-button" type="button">⮬ Choose File</button>
+                        <br><br>
+                        <button class="big-button" id="file-button-download" type="button">⮮ Download</button>
+                    </div>
+                </section>
+
+                <section class="bottom">
+                    <!-- <div>take a trip</div> -->
                     <form id="file-form" method="POST" enctype="multipart/form-data">
                         {% csrf_token %}
                         <input type="file" id="file-choose" style="display: none" name="doc"
@@ -43,7 +54,9 @@
                         <button id="file-button-upload" name="file-upload-button" style="display: none"
                             type="submit"></button>
                     </form>
-                </div>
+
+                </section>
+
             </div>
         </div>
     </div>

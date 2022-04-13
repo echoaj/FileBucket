@@ -5,7 +5,10 @@ $bg-color-palette: (
     "clear": #954C50,
     "copy": #738972,
     "enter": #4F6069,
+    "download": #3C3C3C,
     "title": #AAC5B4,
 );
 $text-color: white;
-$bs: 50px;
+$bs: 50px;  // gap size
+$big-border-radius: 15px;
+$small-border-radius: 5px;

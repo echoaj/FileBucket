@@ -4,7 +4,6 @@ const copyBtn = document.getElementById("copy");
 const fileChooseBtn = document.getElementById("file-button");
 const fileChoose = document.getElementById("file-choose");
 const fileForm = document.getElementById("file-form");
-// const fileDownload = document.getElementById("file-download");
 const fileUploadBtn = document.getElementById("file-button-upload");
 
 
