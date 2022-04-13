@@ -5,6 +5,7 @@ const fileChooseBtn = document.getElementById("file-button");
 const fileChoose = document.getElementById("file-choose");
 const fileForm = document.getElementById("file-form");
 const fileUploadBtn = document.getElementById("file-button-upload");
+const fileDownloadBtn = document.getElementById("file-button-download");
 const fileDownloadLabel = document.getElementById("file-download-label");
 
 
@@ -44,8 +45,14 @@ fileChooseBtn.addEventListener("click", () => {
 fileChoose.addEventListener("change", (e) => {
     e.preventDefault();
     fileUploadBtn.click();
-    // fileDownloadLabel.style.display = "block";
 })
+
+let labelData = fileDownloadLabel.getAttribute("value");
+if(labelData !== ""){
+    fileDownloadLabel.innerText = labelData;
+    fileDownloadLabel.style.display = "block";
+    fileDownloadBtn.style.display = "inline";
+}
 
 function downloadFile(url, name) {
     fetch(url).then(async (res) => {
