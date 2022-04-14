@@ -88,13 +88,6 @@ textarea:focus {
 }
 
 // ****** File ******
-// .bottom {
-//     position: absolute;
-//     top: 50%;
-//     left: 50%;
-//     transform: translate(-50%, -50%);
-//     position: relative;
-// }
 
 .file {
     display: grid;
@@ -118,10 +111,6 @@ textarea:focus {
 .middle {
     // background-color: lightgreen;
     position: relative;
-}
-
-.bottom {
-    // background-color: lightpink;
 }
 
 #file-download-label {

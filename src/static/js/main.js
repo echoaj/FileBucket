@@ -24,36 +24,37 @@ textarea.addEventListener("keydown", (e) => {
             textarea.setRangeText('    ', startPos, startPos, 'end');
         }
     }
-})
+});
 
 
 clearBtn.addEventListener("click", () => {
     textarea.value = "";
-})
+});
 
 copyBtn.addEventListener("click", () => {
     textarea.select();
     textarea.setSelectionRange(0, 9999);
     document.execCommand("copy");
     textarea.setSelectionRange(0, 0);
-})
+});
 
 fileChooseBtn.addEventListener("click", () => {
-    fileChoose.click()
-})
+    fileChoose.click();
+});
 
 fileChoose.addEventListener("change", (e) => {
     e.preventDefault();
     fileUploadBtn.click();
-})
+});
 
 let labelData = fileDownloadLabel.getAttribute("value");
-if(labelData !== ""){
+if (labelData !== "") {
     fileDownloadLabel.innerText = labelData;
     fileDownloadLabel.style.display = "block";
     fileDownloadBtn.style.display = "inline";
 }
 
+// Posible issues, file names with. and non image files
 function downloadFile(url, name) {
     fetch(url).then(async (res) => {
         const dfile = await res.blob();
