@@ -30,7 +30,7 @@
 
             <div class="file">
                 <section class="top">
-                    <div id="file-download-label" style="display: none;" value="{{ file_title }}"></div>
+                    <div id="file-download-label" style="display: none;" value="{{ file.title }}"></div>
                 </section>
 
                 <section class="middle">
@@ -38,7 +38,7 @@
                         <button class="big-button" id="file-button" type="button">⮬ Choose File</button>
                         <br><br>
                         <button class="big-button" id="file-button-download" type="button" style="display: none;"
-                            onclick="downloadFile('{{file_url}}', '{{file_name}}')">⮮ Download</button>
+                            onclick="downloadFile('{{file.url}}', '{{file.name}}')">⮮ Download</button>
                     </div>
                 </section>
 
