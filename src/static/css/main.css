@@ -155,6 +155,18 @@ textarea:focus {
   padding-right: 20px;
 }
 
+button:hover {
+  -webkit-filter: brightness(115%);
+          filter: brightness(115%);
+}
+
+button:active {
+  -webkit-filter: brightness(100%);
+          filter: brightness(100%);
+  -webkit-transform: scale(1.02);
+          transform: scale(1.02);
+}
+
 h1 {
   font-size: 2vw;
 }

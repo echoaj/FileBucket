@@ -158,6 +158,14 @@ textarea:focus {
     padding-right: 20px;
 }
 
+button:hover {
+    filter: brightness(115%);
+}
+
+button:active {
+    filter: brightness(100%);
+    transform: scale(1.02); 
+}
 
 h1 {
     font-size: 2vw;
