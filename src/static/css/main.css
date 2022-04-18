@@ -11,7 +11,7 @@ body {
   height: 100%;
 }
 
-.title {
+.banner {
   background-color: #AAC5B4;
   text-align: center;
   text-decoration: none;
@@ -20,7 +20,7 @@ body {
   padding: 4px;
 }
 
-.options {
+main {
   display: -ms-grid;
   display: grid;
   -ms-grid-columns: 1fr 1fr;

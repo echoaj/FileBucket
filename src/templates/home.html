@@ -14,9 +14,9 @@
 <body>
 
     <div class="container">
-        <h4 class="title">File Bucket Share text and files in real time!</h4>
+        <h4 class="banner">File Bucket Share text and files in real time!</h4>
 
-        <div class="options">
+        <main>
             <form class="text" method="POST">
                 <!-- Middleware token -->
                 {% csrf_token %}
@@ -53,11 +53,9 @@
                         <button id="file-button-upload" name="file-upload-button" style="display: none"
                             type="submit"></button>
                     </form>
-
                 </section>
-
             </div>
-        </div>
+        </main>
     </div>
 
 </body>

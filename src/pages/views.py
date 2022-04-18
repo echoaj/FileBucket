@@ -67,4 +67,3 @@ def home_view(request):
 fss = FileSystemStorage()
 media_path = fss.base_location
 media_folder = Path(media_path)
-
