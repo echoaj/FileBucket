@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from .models import Info
 from django.core.files.storage import FileSystemStorage
+from pathlib import Path
 import shutil
 
 
@@ -28,7 +29,6 @@ def dissect_file(file):
     return data
 
 
-
 # Create your views here.
 def home_view(request):
     # Retrieve last text from database
@@ -36,19 +36,26 @@ def home_view(request):
 
     # Retrieve name of file in media
     fss = FileSystemStorage()
-    tuple = fss.listdir(fss.base_location)
-    flatten_list = sum(tuple, [])
-    title = flatten_list[0]
-    # file = fss.open(filename)
-    size = fss.size(title)
-    result = str(title).split('.')
-    extension = result.pop()
-    name = ".".join(result)
-    file_data = {"name": name,
-                 "extension": extension,
-                 "title": title,
-                 "size": size}
-    file_data.update({"url": fss.url(title)})
+    media_root = fss.base_location
+    file_data = {}
+
+    if Path(media_root).exists():
+        tuple = fss.listdir(media_root)
+        flatten_list = sum(tuple, [])
+        print(flatten_list)
+        print(list(Path(media_root).glob('*.*')))
+
+        if len(flatten_list) > 0:
+            title = flatten_list[0]
+            size = fss.size(title)
+            result = str(title).split('.')
+            extension = result.pop()
+            name = ".".join(result)
+            file_data = {"name": name,
+                         "extension": extension,
+                         "title": title,
+                         "size": size}
+            file_data.update({"url": fss.url(title)})
 
     if request.method == "POST":
         if "text-clear-button" in request.POST:
@@ -60,7 +67,8 @@ def home_view(request):
             db = Info(text=text)
             db.save()
         elif "file-upload-button" in request.POST:
-            shutil.rmtree(fss.base_location)
+            if Path(media_root).exists():
+                shutil.rmtree(fss.base_location)
             file = request.FILES['doc']
             fss.save(file.name, file)
             file_data = dissect_file(file)
