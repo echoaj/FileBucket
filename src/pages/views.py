@@ -5,7 +5,7 @@ from pathlib import Path
 import shutil
 
 
-# limits file name size
+# Limits file name size
 def chop_filename(filename, limit):
     extension = str(filename).split('.').pop()
     title = filename
@@ -15,7 +15,7 @@ def chop_filename(filename, limit):
     return title
 
 
-# returns dictionary of general file information
+# Returns dictionary of general file information
 def dissect_file(filename: str) -> dict:
     title = chop_filename(filename, limit=25)
     split_name = str(filename).split('.')
