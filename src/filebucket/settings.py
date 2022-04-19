@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-#&r1+lsyb6%tl1lpzwd95%#%p4x67r-uk)1oec%u-k5$f)^v@)
 DEBUG = False
 
 # If you leave this blank when hosting it wont open up project
-ALLOWED_HOSTS = ["https://filebucket.herokuapp.com/"]
+ALLOWED_HOSTS = ["*"]
 # User "*" to make any domain open
 
 
