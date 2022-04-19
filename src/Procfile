@@ -1,1 +1,1 @@
-web: gunicorn filebucket.wsgi
+web: gunicorn filebucket.wsgi --log-file -
