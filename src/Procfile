@@ -1,1 +1,1 @@
-web: gunicorn filebucket.wsgi
+web: gunicorn --pythonpath src/ filebucket.wsgi
