@@ -59,7 +59,7 @@ ROOT_URLCONF = 'filebucket.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ["C:/Users/aljos/OneDrive/Documents/Python/FileBucket/src/templates/"],
+        'DIRS': [BASE_DIR / "templates"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
