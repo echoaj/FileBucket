@@ -1,10 +1,10 @@
 /* References: https://coolors.co/palette/6b2e32-954c50-c1928e-e9c8c4-f3e8cd-dcdbc9-aac5b4-738972-40544b-4f6069 */
 @import url("https://fonts.googleapis.com/css2?family=Amiko&family=Averia+Libre:wght@300&family=Bebas+Neue&family=DM+Sans&family=Heebo:wght@300&family=Hind+Madurai:wght@300&family=Inconsolata:wght@500&family=Lexend+Deca:wght@500&family=Noto+Sans&family=Open+Sans:wght@300&family=Prompt:wght@300&family=Work+Sans:wght@200;400&family=Zen+Kaku+Gothic+New:wght@300;400&display=swap");
 body {
-  font-family: 'Averia Libre', cursive;
+  font-family: 'Averia Libre', cursive !important;
   margin: 0px;
   padding: 0px;
-  background-color: #40544B;
+  background-color: #9cafb7;
 }
 
 .container {
@@ -12,7 +12,8 @@ body {
 }
 
 .banner {
-  background-color: #AAC5B4;
+  color: white;
+  background-color: #003d5b;
   text-align: center;
   text-decoration: none;
   font-weight: none;
@@ -26,13 +27,17 @@ main {
   -ms-grid-columns: 1fr 1fr;
       grid-template-columns: 1fr 1fr;
   grid-gap: 20px;
-  background-color: #40544B;
+  background-color: #9cafb7;
   position: absolute;
   top: 27px;
   bottom: 0;
   width: 100%;
   min-height: 500px;
   min-width: 375px;
+}
+
+button {
+  font-family: inherit;
 }
 
 .text {
@@ -93,7 +98,7 @@ textarea:focus {
   grid-auto-rows: minmax(-webkit-min-content, -webkit-max-content);
   grid-auto-rows: minmax(min-content, max-content);
   margin: 50px 50px 50px calc(50px / 2);
-  background-color: #DCDBC9;
+  background-color: #333333;
 }
 
 .file > section {
@@ -109,8 +114,10 @@ textarea:focus {
 }
 
 #file-download-label {
+  color: #d1d1d1;
+  background-color: rgba(255, 255, 255, 0.07);
   border-style: dashed;
-  border-color: #3C3C3C;
+  border-color: rgba(255, 255, 255, 0.56);
   font-size: 2.2vw;
   position: absolute;
   left: 50%;
@@ -132,9 +139,9 @@ textarea:focus {
 }
 
 .big-button {
-  font-size: large;
-  width: 150px;
-  height: 60px;
+  font-size: 20px;
+  width: 170px;
+  height: 65px;
   color: white;
   border-radius: 5px;
   border: none;
@@ -151,7 +158,8 @@ textarea:focus {
 }
 
 #file-button-download {
-  background-color: #3C3C3C;
+  color: #333333;
+  background-color: #d1d1d1;
   padding-right: 20px;
 }
 
@@ -172,7 +180,7 @@ h1 {
 }
 
 @media only screen and (max-width: 800px) {
-  .options {
+  main {
     display: -ms-grid;
     display: grid;
     -ms-grid-columns: 1fr;
@@ -184,6 +192,15 @@ h1 {
   }
   .text, .file {
     margin: 20px;
+  }
+  .big-button {
+    font-size: 12px;
+    width: 100px;
+    height: 40px;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
   }
 }
 /*# sourceMappingURL=main.css.map */
