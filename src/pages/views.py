@@ -32,9 +32,10 @@ def dissect_file(filename: str) -> dict:
 # Create your views here.
 def home_view(request):
 
+    text = ""
     # Retrieve last text from database
-    last_obj = Info.objects.last()
-    text = last_obj.text
+    if Info.objects.count() != 0:
+        text = Info.objects.last().text
 
     # Retrieve name of file in media
     file_data = {}
