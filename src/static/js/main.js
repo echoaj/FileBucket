@@ -56,6 +56,7 @@ if (labelData !== "") {
 
 // Posible issues, file names with. and non image files
 function downloadFile(url, name) {
+    console.log(url);
     fetch(url).then(async (res) => {
         const dfile = await res.blob();
         var blobURL = window.URL && window.URL.createObjectURL ?

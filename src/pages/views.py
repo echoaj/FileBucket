@@ -62,6 +62,7 @@ def home_view(request):
             fss.save(file.name, file)
             file_data = dissect_file(file.name)
             file_data.update({"url": fss.url(file)})
+            print(fss.url(file))
             return render(request, "home.html", {'text_info': text, "file": file_data})
 
     return render(request, "home.html", {'text_info': text, "file": file_data})
