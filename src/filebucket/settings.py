@@ -46,7 +46,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'pages'
+    'pages',
+    'storages'
 ]
 
 MIDDLEWARE = [
@@ -149,6 +150,6 @@ AWS_SECRET_ACCESS_KEY = 'A8egSx9ZdzvQj99Hjr18siYtnMADYPrXY00UOC/b'
 AWS_STORAGE_BUCKET_NAME = 'aws-filebucket'
 AWS_S3_FILE_OVERWRITE = False
 AWS_QUERYSTRING_AUTH = False
-# AWS_DEFAULT_ACL = None
+AWS_DEFAULT_ACL = None
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 # STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
