@@ -18,3 +18,9 @@
 15) python manage.py startapp pages
 16) After creating a function returning http response it won't work because you need to configure the url
 17) Add url to urls.py
+
+gunicorn is a WSGI server that more or less acts like the middle man between a web sever like nginx and the client
+client -> request -> WSGI server -> Web Server -> Client
+WSGI server spawns several workers that can handle several requests at a time.
+WSGI server is fast, secure, has logging feature but can not serve static files like a development server
+which is why nginx is needed.
