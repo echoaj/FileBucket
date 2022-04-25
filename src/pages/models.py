@@ -4,4 +4,5 @@ from django.db import models
 # Create your models here.
 class Info(models.Model):
     text = models.TextField(blank=True, null=True, default="")
-    file = models.FileField(blank=True, null=True, upload_to='media')
+    # upload_to determines the file s3 will download to
+    file = models.FileField(blank=True, null=True)
