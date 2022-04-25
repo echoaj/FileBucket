@@ -46,12 +46,15 @@
                     <!-- <div>take a trip</div> -->
                     <form id="file-form" method="POST" enctype="multipart/form-data">
                         {% csrf_token %}
-                        <input type="file" id="file-choose" style="display: none" name="doc"
+                        <!-- <input type="file" id="file-choose" style="display: none" name="doc"
                               method="post"
-                            enctype="multipart/form-data" data-original-title="choose file">
+                            enctype="multipart/form-data" data-original-title="choose file"> -->
 
                         <button id="file-button-upload" name="file-upload-button" style="display: none"
                             type="submit"></button>
+
+                        {% csrf_token %}
+                        {{ form.file }}
                     </form>
                 </section>
             </div>

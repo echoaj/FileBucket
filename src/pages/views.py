@@ -1,4 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+
+from .forms import InfoForm
 from .models import Info
 from django.core.files.storage import FileSystemStorage
 from pathlib import Path
@@ -20,12 +22,10 @@ def dissect_file(filename: str) -> dict:
     title = chop_filename(filename, limit=25)
     split_name = str(filename).split('.')
     extension = split_name.pop()
-    size = fss.size(filename)
     name = ".".join(split_name)
     data = {"name": name,
             "extension": extension,
-            "title": title,
-            "size": size}
+            "title": title}
     return data
 
 
@@ -33,6 +33,8 @@ def dissect_file(filename: str) -> dict:
 def home_view(request):
 
     text = ""
+    form = InfoForm()
+
     # Retrieve last text from database
     if Info.objects.count() != 0:
         text = Info.objects.last().text
@@ -56,6 +58,27 @@ def home_view(request):
             db = Info(text=text)
             db.save()
         elif "file-upload-button" in request.POST:
+            print("file sent")
+            form = InfoForm(request.POST, request.FILES)
+            if form.is_valid():
+                form.save()
+                file = request.FILES['file']
+                file_data = dissect_file(file.name)
+                file_data.update({"url": fss.url(file)})
+                print(fss.url(file))
+                return render(request, "home.html", {'text_info': text, "file": file_data, "form":form})
+
+    '''
+    if request.method == "POST":
+        if "text-clear-button" in request.POST:
+            text = ''
+            db = Info(text=text)
+            db.save()
+        elif "text-enter-button" in request.POST:
+            text = request.POST.get('user-input-text', False)
+            db = Info(text=text)
+            db.save()
+        elif "file-upload-button" in request.POST:
             if media_folder.exists():
                 shutil.rmtree(media_path)
             file = request.FILES['doc']
@@ -64,8 +87,8 @@ def home_view(request):
             file_data.update({"url": fss.url(file)})
             print(fss.url(file))
             return render(request, "home.html", {'text_info': text, "file": file_data})
-
-    return render(request, "home.html", {'text_info': text, "file": file_data})
+    '''
+    return render(request, "home.html", {'text_info': text, "file": file_data, "form": form})
 
 
 fss = FileSystemStorage()
