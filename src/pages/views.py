@@ -3,6 +3,7 @@ from django.conf import settings
 from .forms import InfoForm
 from .models import Info
 import environ
+import pyrebase
 
 
 # Limits file name size
@@ -60,7 +61,6 @@ def home_view(request):
 
     return render(request, "home.html", {'text_info': text, "file": file_data, "form": form})
 
-import pyrebase
 # Initialise environment variables
 env = environ.Env()
 environ.Env.read_env()
