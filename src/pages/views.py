@@ -61,6 +61,7 @@ def home_view(request):
 
     return render(request, "home.html", {'text_info': text, "file": file_data, "form": form})
 
+
 # Initialise environment variables
 env = environ.Env()
 environ.Env.read_env()
