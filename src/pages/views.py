@@ -50,15 +50,18 @@ def home_view(request):
             db.save()
         elif "file-upload-button" in request.POST:
             print("file sent")
+            # InfoForm is a form that we defined in forms.py
             form = InfoForm(request.POST, request.FILES)
             if form.is_valid():
-                form.save()
-                file = request.FILES['file']
-                file_data = dissect_file(file.name)
+                form.save()                             # saves file to media folder
+                file = request.FILES['file']            # name of field we define in forms.py
+                file_data = dissect_file(file.name)     # gets file data from file.name
                 url = ""
                 file_data.update({"url": url})
+                storage.child(file.name).put(settings.MEDIA_URL[1:] + file.name)    # Remove / at the beginning
                 return render(request, "home.html", {'text_info': text, "file": file_data, "form": form})
 
+    print()
     return render(request, "home.html", {'text_info': text, "file": file_data, "form": form})
 
 
@@ -78,4 +81,4 @@ firebaseConfig = {
 
 firebase = pyrebase.initialize_app(firebaseConfig)
 storage = firebase.storage()
-storage.child("test.txt").put("media/test.txt")
+
