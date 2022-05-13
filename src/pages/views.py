@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.conf import settings
 from .forms import InfoForm
 from .models import Info
+import environ
 
 
 # Limits file name size
@@ -53,15 +54,27 @@ def home_view(request):
                 form.save()
                 file = request.FILES['file']
                 file_data = dissect_file(file.name)
-                url = "https://{}.s3.{}.amazonaws.com/{}/{}"
-                url = url.format(*aws_variables, file_data['title'])
+                url = ""
                 file_data.update({"url": url})
                 return render(request, "home.html", {'text_info': text, "file": file_data, "form": form})
 
     return render(request, "home.html", {'text_info': text, "file": file_data, "form": form})
 
+import pyrebase
+# Initialise environment variables
+env = environ.Env()
+environ.Env.read_env()
 
-aws_variables = (settings.AWS_STORAGE_BUCKET_NAME,
-                 settings.AWS_S3_REGION_NAME,
-                 settings.AWS_LOCATION)
+firebaseConfig = {
+                    "apiKey": env("FIREBASE_API_KEY"),
+                    "authDomain": "filebucketapp.firebaseapp.com",
+                    "projectId": "filebucketapp",
+                    "storageBucket": "filebucketapp.appspot.com",
+                    "messagingSenderId": "602108448767",
+                    "appId": "1:602108448767:web:b210cf7a7caa3bf963a1ca",
+                    "databaseURL": ""
+                 }
 
+firebase = pyrebase.initialize_app(firebaseConfig)
+storage = firebase.storage()
+storage.child("test.txt").put("media/test.txt")
