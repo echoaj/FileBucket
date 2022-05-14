@@ -82,7 +82,7 @@ firebaseConfig = {
                     "storageBucket": "filebucketapp.appspot.com",
                     "messagingSenderId": "602108448767",
                     "appId": "1:602108448767:web:b210cf7a7caa3bf963a1ca",
-                    "serviceAccount": "serviceAccountKey.json",
+                    "serviceAccount": env("GOOGLE_APPLICATION_CREDENTIALS"),
                     "databaseURL": ""
                  }
 
