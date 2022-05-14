@@ -53,15 +53,21 @@ def home_view(request):
             # InfoForm is a form that we defined in forms.py
             form = InfoForm(request.POST, request.FILES)
             if form.is_valid():
-                form.save()                             # saves file to media folder
-                file = request.FILES['file']            # name of field we define in forms.py
-                file_data = dissect_file(file.name)     # gets file data from file.name
-                url = ""
-                file_data.update({"url": url})
-                storage.child(file.name).put(settings.MEDIA_URL[1:] + file.name)    # Remove / at the beginning
+                form.save()                                                 # saves file to media folder
+                file = request.FILES['file']                                # name of field we define in forms.py
+                file_name = file.name
+                file_data = dissect_file(file_name)                         # gets file data from file.name
+                file_local_path = settings.MEDIA_URL[1:] + file_name        # Remove / at the beginning
+                # 1st way of storing file on firebase
+                # storage.child(file_name).put(file=file_local_path)
+                blob = bucket.blob(file_name)
+                blob.upload_from_filename(file_local_path)                  # Upload file to firebase
+                blob.make_public()                                          # Make file download url accessible
+                file_url = blob.public_url
+                file_data.update({"url": file_url})
+                # storage.child("gs://filebucketapp.appspot.com/hello.txt").download(path=".", filename="sup.txt")
                 return render(request, "home.html", {'text_info': text, "file": file_data, "form": form})
 
-    print()
     return render(request, "home.html", {'text_info': text, "file": file_data, "form": form})
 
 
@@ -76,9 +82,10 @@ firebaseConfig = {
                     "storageBucket": "filebucketapp.appspot.com",
                     "messagingSenderId": "602108448767",
                     "appId": "1:602108448767:web:b210cf7a7caa3bf963a1ca",
+                    "serviceAccount": "serviceAccountKey.json",
                     "databaseURL": ""
                  }
 
 firebase = pyrebase.initialize_app(firebaseConfig)
 storage = firebase.storage()
-
+bucket = storage.bucket
