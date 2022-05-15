@@ -2,6 +2,8 @@ from django.shortcuts import render
 from django.conf import settings
 from .forms import InfoForm
 from .models import Info
+from pathlib import Path
+import shutil
 import environ
 import pyrebase
 
@@ -28,6 +30,13 @@ def dissect_file(filename: str) -> dict:
     return data
 
 
+def clear_media():
+    media_root_path = settings.MEDIA_ROOT
+    media_folder = Path(media_root_path)
+    if media_folder.exists():
+        shutil.rmtree(media_root_path)
+
+
 # Create your views here.
 def home_view(request):
 
@@ -35,9 +44,14 @@ def home_view(request):
     form = InfoForm()
     file_data = {}
 
-    # Retrieve last text from database
-    if Info.objects.count() != 0:
+    # Retrieve last text from database if db not empty
+    if request.method == "GET" and Info.objects.count() != 0:
         text = Info.objects.last().text
+        file_name = Info.objects.last().file.name
+        file_data = dissect_file(file_name)
+        blob = bucket.blob(file_name)
+        file_url = blob.public_url
+        file_data.update({"url": file_url})
 
     if request.method == "POST":
         if "text-clear-button" in request.POST:
@@ -49,10 +63,10 @@ def home_view(request):
             db = Info(text=text)
             db.save()
         elif "file-upload-button" in request.POST:
-            print("file sent")
             # InfoForm is a form that we defined in forms.py
             form = InfoForm(request.POST, request.FILES)
             if form.is_valid():
+                clear_media()
                 form.save()                                                 # saves file to media folder
                 file = request.FILES['file']                                # name of field we define in forms.py
                 file_name = file.name
