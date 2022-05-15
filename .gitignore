@@ -131,3 +131,6 @@ dmypy.json
 
 serviceAccountKey.json
 cors.json
+
+#db.sqlite3
+media
