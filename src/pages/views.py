@@ -37,37 +37,46 @@ def clear_media():
         shutil.rmtree(media_root_path)
 
 
+def db_save_text(text):
+    db_cur = Info()
+    if Info.objects.count() != 0:
+        db_last = Info.objects.last()
+        db_cur.file = db_last.file
+        db_cur.file_location = db_last.file_location
+    db_cur.text = text
+    db_cur.save()
+
+
 # Create your views here.
 def home_view(request):
 
     text = ""
     form = InfoForm()
     file_data = {}
-
     # Retrieve last text from database if db not empty
-    if request.method == "GET" and Info.objects.count() != 0:
+    if Info.objects.count() > 0:
         text = Info.objects.last().text
         file_name = Info.objects.last().file.name
         file_data = dissect_file(file_name)
-        blob = bucket.blob(file_name)
-        file_url = blob.public_url
+        file_url = Info.objects.last().file_location
         file_data.update({"url": file_url})
 
     if request.method == "POST":
+
         if "text-clear-button" in request.POST:
             text = ''
-            db = Info(text=text)
-            db.save()
+            db_save_text(text)
         elif "text-enter-button" in request.POST:
             text = request.POST.get('user-input-text', False)
-            db = Info(text=text)
-            db.save()
+            db_save_text(text)
         elif "file-upload-button" in request.POST:
             # InfoForm is a form that we defined in forms.py
             form = InfoForm(request.POST, request.FILES)
             if form.is_valid():
-                clear_media()
-                form.save()                                                 # saves file to media folder
+                if Info.objects.count() > 0:
+                    clear_media()                                           # saves file to media folder
+                    db_last = Info.objects.last()
+                form.save()
                 file = request.FILES['file']                                # name of field we define in forms.py
                 file_name = file.name
                 file_data = dissect_file(file_name)                         # gets file data from file.name
@@ -79,6 +88,13 @@ def home_view(request):
                 blob.make_public()                                          # Make file download url accessible
                 file_url = blob.public_url
                 file_data.update({"url": file_url})
+                # db portion
+                db_last_form = Info.objects.last()
+                if Info.objects.count() > 1:
+                    db_last_form.text = db_last.text
+                db_last_form.file_location = file_url
+                text = db_last_form.text
+                db_last_form.save()
                 # storage.child("gs://filebucketapp.appspot.com/hello.txt").download(path=".", filename="sup.txt")
                 return render(request, "home.html", {'text_info': text, "file": file_data, "form": form})
 
