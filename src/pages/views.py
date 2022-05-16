@@ -6,6 +6,7 @@ from pathlib import Path
 import shutil
 import environ
 import pyrebase
+import os
 
 
 # Limits file name size
@@ -62,7 +63,6 @@ def home_view(request):
         file_data.update({"url": file_url})
 
     if request.method == "POST":
-
         if "text-clear-button" in request.POST:
             text = ''
             db_save_text(text)
@@ -77,10 +77,16 @@ def home_view(request):
                     clear_media()                                           # saves file to media folder
                     db_last = Info.objects.last()
                 form.save()
+                media_path = settings.MEDIA_URL[1:]
                 file = request.FILES['file']                                # name of field we define in forms.py
                 file_name = file.name
                 file_data = dissect_file(file_name)                         # gets file data from file.name
-                file_local_path = settings.MEDIA_URL[1:] + file_name        # Remove / at the beginning
+                file_local_path = media_path + file_name        # Remove / at the beginning
+                # Fixes issue with names files with spaces.
+                # By default django renames those files with _
+                # Causes problem with retrieving that file
+                current_file_name = media_path + os.listdir(media_path)[0]
+                os.rename(current_file_name, file_local_path)
                 # 1st way of storing file on firebase
                 # storage.child(file_name).put(file=file_local_path)
                 blob = bucket.blob(file_name)
@@ -96,8 +102,6 @@ def home_view(request):
                 text = db_last_form.text
                 db_last_form.save()
                 # storage.child("gs://filebucketapp.appspot.com/hello.txt").download(path=".", filename="sup.txt")
-                return render(request, "home.html", {'text_info': text, "file": file_data, "form": form})
-
     return render(request, "home.html", {'text_info': text, "file": file_data, "form": form})
 
 
