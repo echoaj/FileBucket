@@ -32,10 +32,9 @@ def dissect_file(filename: str) -> dict:
 
 
 def clear_media():
-    media_root_path = settings.MEDIA_ROOT
-    media_folder = Path(media_root_path)
+    media_folder = Path(MEDIA_ROOT)
     if media_folder.exists():
-        shutil.rmtree(media_root_path)
+        shutil.rmtree(MEDIA_ROOT)
 
 
 def db_save_text(text):
@@ -46,6 +45,23 @@ def db_save_text(text):
         db_cur.file_location = db_last.file_location
     db_cur.text = text
     db_cur.save()
+
+
+def handle_spaces(file_local_path):
+    # Fixes issue with names files with spaces.
+    # By default django renames those files with _
+    # Causes problem with retrieving that file
+    current_file_name = MEDIA_PATH + os.listdir(MEDIA_PATH)[0]
+    os.rename(current_file_name, file_local_path)
+
+
+def cloud_upload(file_name, file_local_path):
+    # 1st way of storing file on firebase
+    # storage.child(file_name).put(file=file_local_path)
+    blob = bucket.blob(file_name)
+    blob.upload_from_filename(file_local_path)  # Upload file to firebase
+    blob.make_public()  # Make file download url accessible
+    return blob.public_url
 
 
 # Create your views here.
@@ -73,37 +89,33 @@ def home_view(request):
             # InfoForm is a form that we defined in forms.py
             form = InfoForm(request.POST, request.FILES)
             if form.is_valid():
+                # Check if any items in media
                 if Info.objects.count() > 0:
-                    clear_media()                                           # saves file to media folder
+                    clear_media()
                     db_last = Info.objects.last()
-                form.save()
-                media_path = settings.MEDIA_URL[1:]
+                form.save()                                                 # save file to /media and to DB
                 file = request.FILES['file']                                # name of field we define in forms.py
-                file_name = file.name
+                file_name = file.name                                       # name of file
+                file_local_path = MEDIA_PATH + file_name                    # local path of file in /media
                 file_data = dissect_file(file_name)                         # gets file data from file.name
-                file_local_path = media_path + file_name        # Remove / at the beginning
-                # Fixes issue with names files with spaces.
-                # By default django renames those files with _
-                # Causes problem with retrieving that file
-                current_file_name = media_path + os.listdir(media_path)[0]
-                os.rename(current_file_name, file_local_path)
-                # 1st way of storing file on firebase
-                # storage.child(file_name).put(file=file_local_path)
-                blob = bucket.blob(file_name)
-                blob.upload_from_filename(file_local_path)                  # Upload file to firebase
-                blob.make_public()                                          # Make file download url accessible
-                file_url = blob.public_url
+                # Reverses django's default action of
+                # replacing ' ' with _ in file names
+                handle_spaces(file_local_path)
+                # Upload file to firebase and make url to it public
+                file_url = cloud_upload(file_name, file_local_path)
                 file_data.update({"url": file_url})
-                # db portion
+                # Inject last DB record with previous text and file url
                 db_last_form = Info.objects.last()
                 if Info.objects.count() > 1:
                     db_last_form.text = db_last.text
                 db_last_form.file_location = file_url
                 text = db_last_form.text
                 db_last_form.save()
-                # storage.child("gs://filebucketapp.appspot.com/hello.txt").download(path=".", filename="sup.txt")
     return render(request, "home.html", {'text_info': text, "file": file_data, "form": form})
 
+
+MEDIA_PATH = settings.MEDIA_URL[1:]     # Remove / at the beginning
+MEDIA_ROOT = settings.MEDIA_ROOT
 
 # Initialise environment variables
 env = environ.Env()
