@@ -12,8 +12,11 @@ const fileDownloadLabel = document.getElementById("file-download-label");
 let mac = /(Mac|iPhone|iPod|iPad)/i.test(navigator.platform);
 
 if (mac) {
-    document.getElementById('file-button').innerText = "⬆ Choose File";
-    document.getElementById('file-button-download').innerText = "⬇ Download";
+    fileChooseBtn.innerText = "⬆ Choose File";
+    fileDownloadBtn.innerText = "⬇ Download";
+}else {
+    fileChooseBtn.innerText = "⮬ Choose File";
+    fileDownloadBtn.innerText = "⮮ Download";
 }
 
 textarea.addEventListener("keydown", (e) => {
