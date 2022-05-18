@@ -9,6 +9,16 @@ const fileDownloadBtn = document.getElementById("file-button-download");
 const fileDownloadLabel = document.getElementById("file-download-label");
 
 
+let mac = /(Mac|iPhone|iPod|iPad)/i.test(navigator.platform);
+
+if (mac) {
+    fileChooseBtn.innerText = "⬆ Choose File";
+    fileDownloadBtn.innerText = "⬇ Download";
+}else {
+    fileChooseBtn.innerText = "⮬ Choose File";
+    fileDownloadBtn.innerText = "⮮ Download";
+}
+
 textarea.addEventListener("keydown", (e) => {
     var key = e.key || e.keyCode;
     if (key === "Tab") {
@@ -25,7 +35,6 @@ textarea.addEventListener("keydown", (e) => {
         }
     }
 });
-
 
 clearBtn.addEventListener("click", () => {
     textarea.value = "";
@@ -56,6 +65,7 @@ if (labelData !== "") {
 
 // Posible issues, file names with. and non image files
 function downloadFile(url, name) {
+    console.log(url);
     fetch(url).then(async (res) => {
         const dfile = await res.blob();
         var blobURL = window.URL && window.URL.createObjectURL ?

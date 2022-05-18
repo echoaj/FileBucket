@@ -14,7 +14,7 @@
 <body>
 
     <div class="container">
-        <h4 class="banner">File Bucket Share text and files in real time!</h4>
+        <h4 class="banner">File Bucket: Share files and text with others!</h4>
 
         <main>
             <form class="text" method="POST">
@@ -35,10 +35,10 @@
 
                 <section class="middle">
                     <div class="file-button-group">
-                        <button class="big-button" id="file-button" type="button">⮬ Choose File</button>
+                        <button class="big-button" id="file-button" type="button"></button>
                         <br><br>
                         <button class="big-button" id="file-button-download" type="button" style="display: none;"
-                            onclick="downloadFile('{{file.url}}', '{{file.name}}')">⮮ Download</button>
+                            onclick="downloadFile('{{file.url}}', '{{file.name}}')"></button>
                     </div>
                 </section>
 
@@ -46,12 +46,16 @@
                     <!-- <div>take a trip</div> -->
                     <form id="file-form" method="POST" enctype="multipart/form-data">
                         {% csrf_token %}
-                        <input type="file" id="file-choose" style="display: none" name="doc"
+                        <!-- <input type="file" id="file-choose" style="display: none" name="doc"
                               method="post"
-                            enctype="multipart/form-data" data-original-title="choose file">
+                            enctype="multipart/form-data" data-original-title="choose file"> -->
 
                         <button id="file-button-upload" name="file-upload-button" style="display: none"
                             type="submit"></button>
+
+                        {% csrf_token %}
+                    <!-- Make it so that upload button can be pressed. -->
+                        {{ form.file }}
                     </form>
                 </section>
             </div>

@@ -7,7 +7,9 @@
 }
 
 body {
-    font-family: 'Averia Libre', cursive;
+    font-family: 'Averia Libre', cursive !important;
+    // font-family: "arial";
+
     margin: 0px;
     padding: 0px;
     background-color: bg("background");
@@ -18,6 +20,7 @@ body {
 }
 
 .banner {
+    color: $text-color;
     background-color: bg("title");
     text-align: center;
     text-decoration: none;
@@ -37,6 +40,10 @@ main {
     width: 100%;
     min-height: 500px;
     min-width: 375px;
+}
+
+button {
+    font-family: inherit;
 }
 
 .text {
@@ -65,7 +72,7 @@ textarea:focus {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 10px;
-
+    
     >button {
         height: 25px;
         border-radius: $small-border-radius;
@@ -114,8 +121,10 @@ textarea:focus {
 }
 
 #file-download-label {
+    color: bg("download");
+    background-color: rgba(255, 255, 255, 0.07);
     border-style: dashed;
-    border-color: bg("download");
+    border-color: rgba(255, 255, 255, 0.56);
     font-size: 2.2vw;
     position: absolute;
     left: 50%;
@@ -135,9 +144,9 @@ textarea:focus {
 }
 
 .big-button {
-    font-size: large;
-    width: 150px;
-    height: 60px;
+    font-size: 20px;
+    width: 170px;
+    height: 65px;
     color: $text-color;
     border-radius: $small-border-radius;
     border: none;
@@ -154,6 +163,7 @@ textarea:focus {
 }
 
 #file-button-download {
+    color: bg("file");
     background-color: bg("download");
     padding-right: 20px;
 }
@@ -172,7 +182,7 @@ h1 {
 }
 
 @media only screen and (max-width: 800px) {
-    .options {
+    main {
         display: grid;
         grid-template-columns: 1fr;
         grid-gap: 5px;
@@ -182,5 +192,15 @@ h1 {
     }
     .text, .file {
         margin: 20px;
+    }
+
+    .big-button {
+        font-size: 12px;
+        width: 100px;
+        height: 40px;
+        color: $text-color;
+        border-radius: $small-border-radius;
+        border: none;
+        cursor: pointer;
     }
   }
