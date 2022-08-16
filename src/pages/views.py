@@ -1,3 +1,4 @@
+from django.http import JsonResponse, HttpResponse
 from django.shortcuts import render
 from django.conf import settings
 from .forms import InfoForm
@@ -66,7 +67,8 @@ def cloud_upload(file_name, file_local_path):
 
 # Create your views here.
 def home_view(request):
-
+    # global REFRESH_ON
+    # REFRESH_ON = False
     text = ""
     form = InfoForm()
     file_data = {}
@@ -83,9 +85,11 @@ def home_view(request):
             text = ''
             db_save_text(text)
         elif "text-enter-button" in request.POST:
+            # REFRESH_ON = True
             text = request.POST.get('user-input-text', False)
             db_save_text(text)
         elif "file-upload-button" in request.POST:
+            # REFRESH_ON = True
             # InfoForm is a form that we defined in forms.py
             form = InfoForm(request.POST, request.FILES)
             if form.is_valid():
@@ -113,9 +117,19 @@ def home_view(request):
                 db_last_form.save()
     return render(request, "home.html", {'text_info': text, "file": file_data, "form": form})
 
+"""
+def refresh_view(request):
+    print(request.method)
+    global REFRESH_ON
+    if request.method == "POST":
+        print("POSt create =============")
+        REFRESH_ON = False
+    return HttpResponse(REFRESH_ON)
+"""
 
 MEDIA_PATH = settings.MEDIA_URL[1:]     # Remove / at the beginning
 MEDIA_ROOT = settings.MEDIA_ROOT
+# REFRESH_ON = False
 
 # Initialise environment variables
 env = environ.Env()

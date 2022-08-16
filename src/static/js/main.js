@@ -90,6 +90,53 @@ function downloadFile(url, name) {
     });
 }
 
+
+// Trying to make screen refresh
+
+/*
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+
+// Create ajax request that polls every 3 seconds
+async function poll() {
+    console.log("Polling")
+    let xhr = new XMLHttpRequest();
+    xhr.open("GET", "/refresh", true);
+    xhr.onreadystatechange = function () {
+        let data = xhr.responseText;
+        if (data === "True"){
+            console.log("Refreshing");
+            // make post request
+            xhr.open("POST", "/refresh/", true);
+            // set the x-csrf-token header
+            xhr.setRequestHeader("X-CSRFToken", getCookie("csrftoken"));
+            xhr.send();
+            window.location.reload();
+        }
+    };
+    xhr.send();
+    setTimeout(poll, 5000);
+};
+poll();
+
+*/
+
+
+
 /*
 ALL KEY CODES
 
