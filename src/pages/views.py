@@ -1,4 +1,3 @@
-from django.http import JsonResponse, HttpResponse
 from django.shortcuts import render
 from django.conf import settings
 from .forms import InfoForm
