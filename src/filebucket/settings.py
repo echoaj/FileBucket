@@ -35,7 +35,9 @@ DEBUG = strtobool(env('DEBUG'))
 # If you leave this blank when hosting it wont open up project
 ALLOWED_HOSTS = ['localhost',
                  '127.0.0.1',
-                 'filebucket.herokuapp.com']
+                 'filebucket.herokuapp.com',
+                 'filebucketpy.com',
+                 'filebucket.azurewebsites.net']
 # User "*" to make any domain open
 
 # Application definition
